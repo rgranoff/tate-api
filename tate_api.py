@@ -6,7 +6,7 @@ import requests
 app = FastAPI()
 
 CSV_URLS = {
-    "Tate Artist Data": "https://drive.google.com/uc?id=1CG0IWXoB7-PPFYCt0FllmFGSm8luIneC",
+    "Tate Artist Data": "https://drive.google.com/uc?id=1GOIWXoB7-PPFYCt0FIImFGSm8luIneC",
     "Tate Artwork Data": "https://drive.google.com/uc?id=1agKNrCCPfjnzDLHThrFdnSi1CDIx0RAD",
 }
 
@@ -23,16 +23,10 @@ def fetch_data(dataset: str):
     response = requests.get(url)
 
     if response.status_code == 200:
-        try:
-            # Read CSV with low_memory=False for better type inference
-            df = pd.read_csv(io.StringIO(response.text), low_memory=False)
+        df = pd.read_csv(io.StringIO(response.text))
 
-            # Replace NaN values with NULL to prevent JSON serialization errors
-            df = df.fillna("NULL")  # Use df.fillna(0) for numerical fields if needed
-            
-            return df.to_dict(orient="records")
-
-        except Exception as e:
-            return {"error": f"Error processing CSV: {str(e)}"}
+        # **Fix NaN values to prevent JSON error**
+        df = df.fillna("")  # Replace NaN with empty strings
+        return df.to_dict(orient="records")
 
     return {"error": "Failed to fetch data"}
