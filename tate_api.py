@@ -9,6 +9,9 @@ CSV_URLS = {
     "Tate Artist Data": "https://drive.google.com/uc?id=1CGOIWXoB7-PPFYCt0FIImFGSm8luIneC",
     "Tate Artwork Data": "https://drive.google.com/uc?id=1agKNrCCPfjnzDLHThrFdnSi1CDIx0RAD",
 }
+@app.get("/")
+def root():
+    return {"message": "Welcome to the Tate API! Use /fetch_data/{dataset} to get data."}
 
 @app.get("/fetch_data/{dataset}")
 def fetch_data(dataset: str):
