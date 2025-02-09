@@ -6,8 +6,10 @@ import requests
 app = FastAPI()
 
 CSV_URLS = {
-    "Tate Artist Data": "https://drive.google.com/uc?id=1GOIWXoB7-PPFYCt0FIImFGSm8luIneC",
-    "Tate Artwork Data": "https://drive.google.com/uc?id=1agKNrCCPfjnzDLHThrFdnSi1CDIx0RAD",
+    "Tate Artist Data": "https://raw.githubusercontent.com/rgranoff/tate-api/main/artist_data.csv",
+    "Tate Artwork Data": "https://raw.githubusercontent.com/rgranoff/tate-api/main/artwork_data.csv"
+}
+
 }
 
 @app.get("/")
