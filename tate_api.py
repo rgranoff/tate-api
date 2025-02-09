@@ -32,3 +32,4 @@ def fetch_data(dataset: str):
         return df.to_dict(orient="records")
 
     return {"error": "Failed to fetch data"}
+Update API to use GitHub raw CSV links
